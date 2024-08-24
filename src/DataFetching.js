@@ -11,7 +11,7 @@ function DataFetching() {
     const [searchedValue, setSearchedValue] = useState('')
 
     useEffect(() => {
-        
+
         const fetchData = async () => {
             try {
                 const response = await axios.get('https://openapiv1.coinstats.app/coins', {
@@ -51,24 +51,26 @@ function DataFetching() {
 
     const handleSearch = (e) => {
         console.log("function call");
-        e.preventDefault()
         setSearchedValue(e.target.value)
-        if (searchedValue.length > 0) {
+
+        if (document.querySelector('.bhenchod')?.value.length > 0) {
+            console.log('inside if')
             const searchedData = value.filter((v) => {
                 return v.name.toLowerCase().includes(searchedValue.toLowerCase());
             })
             setValue(searchedData)
         }
-        else
-        {
+        else {
+            console.log('searchedValue.length');
             const Storedata = localStorage.getItem('users')
             let data = JSON.parse(Storedata)
-            console.log("data",data);
-            
+            console.log("data", data);
+
+
             setValue(data)
         }
     }
-
+    console.log('search value', document.querySelector('.bhenchod')?.value);
     const style = {
         container: "w-full h-screen flex items-center  flex-col",
         tableContainer: "overflow-x-auto",
@@ -84,7 +86,7 @@ function DataFetching() {
     return (
         <div className={style.container}>
             <div>
-                <input className={style.input} type="text" placeholder="Search..." onChange={(e) => handleSearch(e)} />
+                <input className='bhenchod' style={{margin:'1rem',border: '1px solid black',padding:'5px'}} value={searchedValue} type="text" placeholder="Search..." onChange={(e) => handleSearch(e)} />
                 <select name="" id="" onChange={(e) => handleEvent(e)}>
                     {options.length > 0 &&
                         options.map((o, i) => {
